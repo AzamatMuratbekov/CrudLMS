@@ -7,10 +7,7 @@ import com.peaksoft.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/courses")
@@ -37,6 +34,18 @@ public class CourseController {
     @PostMapping("/saveCourse")
     public String save(@ModelAttribute("course") Course course) {
         courseService.addCourse(course,course.getCompanyId());
+        return "redirect:/courses";
+    }
+    @GetMapping("update/{id}")
+    public String update(@PathVariable("id")Long id, Model model){
+        Course course = courseService.getById(id);
+        model.addAttribute("companies",companyService.getAllCompany());
+        model.addAttribute("course",course);
+        return "course/updateCourse";
+    }
+    @PatchMapping ("/{id}")
+    public String updateCourse(@PathVariable("id") Long id,@ModelAttribute("course")Course course){
+        courseService.updateCourse(id, course,course.getCompanyId());
         return "redirect:/courses";
     }
 }

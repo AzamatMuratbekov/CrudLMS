@@ -17,7 +17,7 @@ public class Course {
     @Column(name = "course_name")
     private String courseName;
     private String duration;
-    @ManyToOne(cascade =CascadeType.REFRESH)
+    @ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.MERGE})
     @JoinColumn(name = "company_id")
     private Company company;
     @OneToMany(cascade =CascadeType.ALL,mappedBy = "course")

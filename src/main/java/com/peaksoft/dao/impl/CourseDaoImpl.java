@@ -1,6 +1,7 @@
 package com.peaksoft.dao.impl;
 
 import com.peaksoft.dao.CourseDao;
+import com.peaksoft.entity.Company;
 import com.peaksoft.entity.Course;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +28,7 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public void updateCourse(Long id, Course course) {
-        Course course1 = getById(id);
+        Course course1 = entityManager.find(Course.class,id);
         course1.setCourseName(course.getCourseName());
         course1.setDuration(course.getDuration());
         entityManager.merge(course1);

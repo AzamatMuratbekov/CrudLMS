@@ -21,6 +21,7 @@
         <td th:text="${course.courseName}"></td>
         <td th:text="${course.duration}"></td>
         <td th:text="${course.company.companyName}"></td>
+        <td><a th:href="@{/courses/update/{id}(id=${course.id})}">update</a><td>
     </tr>
     </tbody>
 </table>
